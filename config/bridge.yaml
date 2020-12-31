@@ -1,0 +1,45 @@
+---
+opc:
+  url: opc.tcp://127.0.0.1:49320/OPCUA/SimulationServer/
+  reserve_device:
+    -
+      _System
+    -
+      _Statistics
+  reserve_tag:
+    -
+      _System
+    -
+      _Hints
+      
+mqtt:
+  host: 127.0.0.1
+  port: 1884
+  user: user
+  pswd: pass
+  topic_down: '/opc/down/#'
+  topic_up: '/opc/up'
+
+queue:
+  size: -1
+  timeout: 1
+
+logging:
+  version: 1
+  disable_existing_loggers: false
+  formatters: 
+    default: 
+      format: "[%(asctime)s] [%(process)d] [%(thread)d] [%(filename)20s] [line:%(lineno)4d] [%(levelname)-6s] %(message)s"
+  handlers:
+    default:
+      level: DEBUG
+      formatter: default
+      class: logging.FileHandler
+      encoding: utf8
+      filename: /var/log/bridge/FILE.log
+  loggers:
+    default:
+      handlers: 
+        - default
+      level: DEBUG
+      propagate: false
